@@ -39,6 +39,12 @@
                             </div>
                             @enderror
                     </label>
+
+                    <select name="category_name" class="mt-8 p-4 bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
+                        <option value="仕事">仕事</option>
+                        <option value="趣味">趣味</option>
+                        <option value="その他">その他</option>
+                    </select>
  
                     <button type="submit" class="mt-8 p-4 bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
                         追加する
@@ -67,6 +73,11 @@
                                   <td class="px-3 py-4 text-sm text-gray-500">
                                       <div>
                                           {{ $item->name }}
+                                      </div>
+                                  </td>
+                                  <td class="px-3 py-4 text-sm text-gray-500">
+                                      <div>
+                                          {{ $item->category}}
                                       </div>
                                   </td>
                                   <td class="p-0 text-right text-sm font-medium">

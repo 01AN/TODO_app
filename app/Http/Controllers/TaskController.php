@@ -52,6 +52,8 @@ class TaskController extends Controller
         //モデル->カラム名 = 値 で、データを割り当てる
         $task->name = $request->input('task_name');
 
+        $task->category = $request->input('category_name');
+
         //データベースに保存
         $task->save();
 
@@ -106,6 +108,8 @@ class TaskController extends Controller
 
             //モデル->カラム名 = 値 で、データを割り当てる
             $task->name = $request->input('task_name');
+
+            $task->category = $request->input('category_name');
 
             //データベースに保存
             $task->save();

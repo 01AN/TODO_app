@@ -37,6 +37,11 @@
                                   </div>
                               @enderror
                           </label>
+                    <select name="category_name" class="mt-8 p-4 bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
+                        <option value="仕事">仕事</option>
+                        <option value="趣味">趣味</option>
+                        <option value="その他">その他</option>
+                    </select>
   
                           <div class="mt-8 w-full flex items-center justify-center gap-10">
                               <a href="/tasks" class="block shrink-0 underline underline-offset-2">

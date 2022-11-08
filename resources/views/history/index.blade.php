@@ -43,6 +43,11 @@
                                           {{ $item->name }}
                                       </div>
                                   </td>
+                                  <td class="px-3 py-4 text-sm text-gray-500">
+                                      <div>
+                                          {{ $item->category }}
+                                      </div>
+                                  </td>
                                   <td class="p-0 text-right text-sm font-medium">
                                       <div class="flex justify-end">
                                           <div>
