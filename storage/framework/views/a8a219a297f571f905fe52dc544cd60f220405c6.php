@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./resources/views/tasks/tasksindex.css">
     <title>Todo</title>
- 
+
 </head>
  
 <body class="flex flex-col min-h-[100vh]">
@@ -77,7 +78,7 @@ unset($__errorArgs, $__bag); ?>
                       </thead>
                       <tbody>
                           <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <tr>
+                              <tr class="filter-item">
                                   <td>
                                       <div>
                                           <?php echo e($item->name); ?>
@@ -85,7 +86,7 @@ unset($__errorArgs, $__bag); ?>
                                       </div>
                                   </td>
                                   <td>
-                                      <div>
+                                      <div  data-item="<?php echo e($item->category); ?>">
                                           <?php echo e($item->category); ?>
 
                                       </div>
@@ -118,6 +119,26 @@ unset($__errorArgs, $__bag); ?>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tbody>
                   </table>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th scope="col">
+                                  カテゴリー選択
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <button id="IDall">すべて</button>
+                                  <button id="IDwork">仕事</button>
+                                  <button id="IDhobby">趣味</button>
+                                  <button id="IDother">その他</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <div class="clear"></div>
               </div>
           </div>
       </div>
@@ -142,8 +163,10 @@ unset($__errorArgs, $__bag); ?>
             return false;
         }
     }
+    
 </script>
- 
+
 </html>
+
 
 <?php /**PATH C:\Users\CRE\Documents\todo_app\resources\views/tasks/index.blade.php ENDPATH**/ ?>

@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./resources/views/tasks/tasksindex.css">
     <title>Todo</title>
- 
+
 </head>
  
 <body class="flex flex-col min-h-[100vh]">
@@ -69,14 +70,14 @@
                       </thead>
                       <tbody>
                           @foreach ($tasks as $item)
-                              <tr>
+                              <tr class="filter-item">
                                   <td>
                                       <div>
                                           {{ $item->name }}
                                       </div>
                                   </td>
                                   <td>
-                                      <div>
+                                      <div  data-item="{{ $item->category}}">
                                           {{ $item->category}}
                                       </div>
                                   </td>
@@ -108,6 +109,26 @@
                           @endforeach
                       </tbody>
                   </table>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th scope="col">
+                                  カテゴリー選択
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <button id="IDall">すべて</button>
+                                  <button id="IDwork">仕事</button>
+                                  <button id="IDhobby">趣味</button>
+                                  <button id="IDother">その他</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <div class="clear"></div>
               </div>
           </div>
       </div>
@@ -132,7 +153,9 @@
             return false;
         }
     }
+    
 </script>
- 
+
 </html>
+
 
