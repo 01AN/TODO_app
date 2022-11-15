@@ -24,12 +24,15 @@
       <div class="max-w-7xl mx-auto mt-20">
           <div class="inline-block min-w-full py-2 align-middle">
               <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                  <table class="min-w-full divide-y divide-gray-300">
+                  <table border="1" style="border-collapse: collapse">
                       <thead class="bg-gray-50">
                           <tr>
-                              <th scope="col"
-                                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                                  完了済みタスク</th>
+                              <th scope="col">
+                                  完了済みタスク
+                              </th>
+                              <th scope="col">
+                                  カテゴリー
+                              </th>
                           </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">

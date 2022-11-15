@@ -61,66 +61,57 @@ unset($__errorArgs, $__bag); ?>
 
                 </form>
                 <?php if($tasks->isNotEmpty()): ?>
-      <div class="max-w-7xl mx-auto mt-20">
-          <div class="inline-block min-w-full py-2 align-middle">
-              <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                  <table class="min-w-full divide-y divide-gray-300">
+      <div>
+          <div>
+              <div>
+                  <table border="1" style="border-collapse: collapse">
                       <thead class="bg-gray-50">
                           <tr>
-                              <th scope="col"
-                                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                                  タスク</th>
-                              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                  <span class="sr-only">Actions</span>
+                              <th scope="col">
+                                  タスク
+                              </th>
+                              <th scope="col">
+                                  カテゴリー
                               </th>
                           </tr>
                       </thead>
-                      <tbody class="divide-y divide-gray-200 bg-white">
+                      <tbody>
                           <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <tr>
-                                  <td class="px-3 py-4 text-sm text-gray-500">
+                                  <td>
                                       <div>
                                           <?php echo e($item->name); ?>
 
                                       </div>
                                   </td>
-                                  <td class="px-3 py-4 text-sm text-gray-500">
+                                  <td>
                                       <div>
                                           <?php echo e($item->category); ?>
 
                                       </div>
                                   </td>
-                                  <td class="p-0 text-right text-sm font-medium">
-                                      <div class="flex justify-end">
-                                          <div>
-                                              <form action="/tasks/<?php echo e($item->id); ?>"
-                                                  method="post"
-                                                  class="inline-block text-gray-500 font-medium"
-                                                  role="menuitem" tabindex="-1">
-                                                  <?php echo csrf_field(); ?>
-                                                  <?php echo method_field('PUT'); ?>
-
-                                                  <input type="hidden" name="status" value="<?php echo e($item->status); ?>">
-
-                                                  <button type="submit"
-                                                      class="bg-emerald-700 py-4 w-20 text-white md:hover:bg-emerald-800 transition-colors">完了</button>
-                                              </form>
-                                          </div>
-                                          <div>
-                                              <a href="/tasks/<?php echo e($item->id); ?>/edit/"
-                                                  class="inline-block text-center py-4 w-20 underline underline-offset-2 text-sky-600 md:hover:bg-sky-100 transition-colors">編集</a>
-                                          </div>
-                                          <div>
-                                              <form onsubmit="return deleteTask();"
-                                              action="/tasks/<?php echo e($item->id); ?>" method="post"
-                                                  class="inline-block text-gray-500 font-medium"
-                                                  role="menuitem" tabindex="-1">
+                                  <td>
+                                      <div>
+                                          <form action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
+                                               <?php echo csrf_field(); ?>
+                                               <?php echo method_field('PUT'); ?>
+                                               <input type="hidden" name="status" value="<?php echo e($item->status); ?>"></input>
+                                               <button type="submit">完了</button>
+                                          </form>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <a href="/tasks/<?php echo e($item->id); ?>/edit/">編集</a>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <form onsubmit="return deleteTask();" action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
                                                   <?php echo csrf_field(); ?>
                                                   <?php echo method_field('DELETE'); ?>
-                                                  <button type="submit"
-                                                      class="py-4 w-20 md:hover:bg-slate-200 transition-colors">削除</button>
+                                                  <button type="submit">削除</button>
                                               </form>
-                                          </div>
                                       </div>
                                   </td>
                               </tr>
@@ -153,4 +144,6 @@ unset($__errorArgs, $__bag); ?>
     }
 </script>
  
-</html><?php /**PATH C:\Users\CRE\Documents\todo_app\resources\views/tasks/index.blade.php ENDPATH**/ ?>
+</html>
+
+<?php /**PATH C:\Users\CRE\Documents\todo_app\resources\views/tasks/index.blade.php ENDPATH**/ ?>
