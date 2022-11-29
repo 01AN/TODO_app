@@ -71,12 +71,12 @@
                       <tbody>
                           @foreach ($tasks as $item)
                               <tr class="filter-item">
-                                  <td>
+                                  <td class="item-name">
                                       <div>
                                           {{ $item->name }}
                                       </div>
                                   </td>
-                                  <td>
+                                  <td class="category=name">
                                       <div  data-item="{{ $item->category}}">
                                           {{ $item->category}}
                                       </div>
@@ -109,7 +109,12 @@
                           @endforeach
                       </tbody>
                   </table>
-                  <table>
+                  <div class="clear"></div>
+              </div>
+          </div>
+      </div>
+  @endif
+  <table>
                       <thead>
                           <tr>
                               <th scope="col">
@@ -120,19 +125,13 @@
                       <tbody>
                           <tr>
                               <td>
-                                  <button id="IDall">すべて</button>
-                                  <button id="IDwork">仕事</button>
-                                  <button id="IDhobby">趣味</button>
-                                  <button id="IDother">その他</button>
+                                  <input id="IDwork" type="button" value="仕事" onclick="selectCAT(this)">
+                                  <input id="IDhobby" type="button" value="趣味" onclick="selectCAT(this)">
+                                  <input id="IDother" type="button" value="その他" onclick="selectCAT(this)">
                               </td>
                           </tr>
                       </tbody>
                   </table>
-                  <div class="clear"></div>
-              </div>
-          </div>
-      </div>
-  @endif
             </div>
         </div>
     </main>
@@ -146,6 +145,21 @@
 </body>
 
 <script>
+    let filter_item;
+    let tasks = []
+    window.onload=function(){
+        
+        filter_item = document.getElementsByClassName("filter-item");
+        for (let item of filter_item) {
+            console.log(item.cells[0].innerText)
+            console.log( item.cells[1].innerText)
+            tasks.push({name: item.cells[0].innerText, category: item.cells[1].innerText})
+        }
+
+        
+        console.log(tasks)
+    }
+
     function deleteTask(){
         if (confirm('本当に削除しますか？')){
             return true;
@@ -154,6 +168,17 @@
         }
     }
     
+    function selectCAT(element){
+        console.log(element.id)
+    }
+
+    // let itemname = ["洗濯","買い物","ゲーム"]
+    // let itemcategory = ["仕事","その他","仕事"]
+
+    // let task = {
+    //     name: "",
+    //     cate: ""
+    // }
 </script>
 
 </html>

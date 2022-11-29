@@ -79,13 +79,13 @@ unset($__errorArgs, $__bag); ?>
                       <tbody>
                           <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <tr class="filter-item">
-                                  <td>
+                                  <td class="item-name">
                                       <div>
                                           <?php echo e($item->name); ?>
 
                                       </div>
                                   </td>
-                                  <td>
+                                  <td class="category=name">
                                       <div  data-item="<?php echo e($item->category); ?>">
                                           <?php echo e($item->category); ?>
 
@@ -119,7 +119,12 @@ unset($__errorArgs, $__bag); ?>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tbody>
                   </table>
-                  <table>
+                  <div class="clear"></div>
+              </div>
+          </div>
+      </div>
+  <?php endif; ?>
+  <table>
                       <thead>
                           <tr>
                               <th scope="col">
@@ -130,19 +135,13 @@ unset($__errorArgs, $__bag); ?>
                       <tbody>
                           <tr>
                               <td>
-                                  <button id="IDall">すべて</button>
-                                  <button id="IDwork">仕事</button>
-                                  <button id="IDhobby">趣味</button>
-                                  <button id="IDother">その他</button>
+                                  <input id="IDwork" type="button" value="仕事" onclick="selectCAT(this)">
+                                  <input id="IDhobby" type="button" value="趣味" onclick="selectCAT(this)">
+                                  <input id="IDother" type="button" value="その他" onclick="selectCAT(this)">
                               </td>
                           </tr>
                       </tbody>
                   </table>
-                  <div class="clear"></div>
-              </div>
-          </div>
-      </div>
-  <?php endif; ?>
             </div>
         </div>
     </main>
@@ -156,6 +155,21 @@ unset($__errorArgs, $__bag); ?>
 </body>
 
 <script>
+    let filter_item;
+    let tasks = []
+    window.onload=function(){
+        
+        filter_item = document.getElementsByClassName("filter-item");
+        for (let item of filter_item) {
+            console.log(item.cells[0].innerText)
+            console.log( item.cells[1].innerText)
+            tasks.push({name: item.cells[0].innerText, category: item.cells[1].innerText})
+        }
+
+        
+        console.log(tasks)
+    }
+
     function deleteTask(){
         if (confirm('本当に削除しますか？')){
             return true;
@@ -164,6 +178,17 @@ unset($__errorArgs, $__bag); ?>
         }
     }
     
+    function selectCAT(element){
+        console.log(element.id)
+    }
+
+    // let itemname = ["洗濯","買い物","ゲーム"]
+    // let itemcategory = ["仕事","その他","仕事"]
+
+    // let task = {
+    //     name: "",
+    //     cate: ""
+    // }
 </script>
 
 </html>
