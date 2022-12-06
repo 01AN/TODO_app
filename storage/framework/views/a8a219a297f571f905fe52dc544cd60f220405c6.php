@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./resources/views/tasks/tasksindex.css">
+    <link rel="stylesheet" href="<?php echo e(asset('/css/style.css')); ?>">
     <title>Todo</title>
 
 </head>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </header>
- 
+
     <main class="grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="py-[100px]">
@@ -65,60 +65,44 @@ unset($__errorArgs, $__bag); ?>
       <div>
           <div>
               <div>
-                  <table border="1" style="border-collapse: collapse">
-                      <thead class="bg-gray-50">
-                          <tr>
-                              <th scope="col">
-                                  タスク
-                              </th>
-                              <th scope="col">
-                                  カテゴリー
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <tr class="filter-item">
-                                  <td class="item-name">
-                                      <div>
-                                          <?php echo e($item->name); ?>
+                  <div>
+                      タイトル
+                  </div>
+                  <div>
+                      カテゴリー
+                  </div>
+              </div>
+              <div class=filter_item>
+                  <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <div class=item>
+                      <div>
+                          <?php echo e($item->name); ?>
 
-                                      </div>
-                                  </td>
-                                  <td class="category=name">
-                                      <div  data-item="<?php echo e($item->category); ?>">
-                                          <?php echo e($item->category); ?>
+                  </div>
+                  <div  data-item="<?php echo e($item->category); ?>">
+                      <?php echo e($item->category); ?>
 
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <form action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
-                                               <?php echo csrf_field(); ?>
-                                               <?php echo method_field('PUT'); ?>
-                                               <input type="hidden" name="status" value="<?php echo e($item->status); ?>"></input>
-                                               <button type="submit">完了</button>
-                                          </form>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <a href="/tasks/<?php echo e($item->id); ?>/edit/">編集</a>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <form onsubmit="return deleteTask();" action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
-                                                  <?php echo csrf_field(); ?>
-                                                  <?php echo method_field('DELETE'); ?>
-                                                  <button type="submit">削除</button>
-                                              </form>
-                                      </div>
-                                  </td>
-                              </tr>
-                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      </tbody>
-                  </table>
+                  </div>
+                  <div>
+                      <form action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
+                          <?php echo csrf_field(); ?>
+                          <?php echo method_field('PUT'); ?>
+                          <input type="hidden" name="status" value="<?php echo e($item->status); ?>"></input>
+                          <button type="submit">完了</button>
+                      </form>
+                  </div>
+                  <div>
+                      <a href="/tasks/<?php echo e($item->id); ?>/edit/">編集</a>
+                  </div>
+                  <div>
+                      <form onsubmit="return deleteTask();" action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
+                      <?php echo csrf_field(); ?>
+                      <?php echo method_field('DELETE'); ?>
+                      <button type="submit">削除</button>
+                      </form>
+                  </div>
+                  </div>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   <div class="clear"></div>
               </div>
           </div>
@@ -159,7 +143,7 @@ unset($__errorArgs, $__bag); ?>
     let tasks = []
     window.onload=function(){
         
-        filter_item = document.getElementsByClassName("filter-item");
+        filter_item = document.getElementsByClassName("filter_item");
         for (let item of filter_item) {
             console.log(item.cells[0].innerText)
             console.log( item.cells[1].innerText)
@@ -179,7 +163,48 @@ unset($__errorArgs, $__bag); ?>
     }
     
     function selectCAT(element){
-        console.log(element.id)
+        let category = element.value
+        for (let item of tasks){
+            if(category == item.category){
+                console.log(filter_item)
+                filter_item.item(0).appendChild(`<td class="item-name">
+                                      <div>
+                                          <?php echo e($item->name); ?>
+
+                                      </div>
+                                  </td>
+                                  <td class="category=name">
+                                      <div  data-item="<?php echo e($item->category); ?>">
+                                          <?php echo e($item->category); ?>
+
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <form action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
+                                               <?php echo csrf_field(); ?>
+                                               <?php echo method_field('PUT'); ?>
+                                               <input type="hidden" name="status" value="<?php echo e($item->status); ?>"></input>
+                                               <button type="submit">完了</button>
+                                          </form>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <a href="/tasks/<?php echo e($item->id); ?>/edit/">編集</a>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <form onsubmit="return deleteTask();" action="/tasks/<?php echo e($item->id); ?>" method="post" role="menuitem" tabindex="-1">
+                                                  <?php echo csrf_field(); ?>
+                                                  <?php echo method_field('DELETE'); ?>
+                                                  <button type="submit">削除</button>
+                                              </form>
+                                      </div>
+                                  </td>`)
+            }
+        }
     }
 
     // let itemname = ["洗濯","買い物","ゲーム"]

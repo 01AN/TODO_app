@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./resources/views/tasks/tasksindex.css">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <title>Todo</title>
 
 </head>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </header>
- 
+
     <main class="grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="py-[100px]">
@@ -57,58 +57,42 @@
       <div>
           <div>
               <div>
-                  <table border="1" style="border-collapse: collapse">
-                      <thead class="bg-gray-50">
-                          <tr>
-                              <th scope="col">
-                                  タスク
-                              </th>
-                              <th scope="col">
-                                  カテゴリー
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          @foreach ($tasks as $item)
-                              <tr class="filter-item">
-                                  <td class="item-name">
-                                      <div>
-                                          {{ $item->name }}
-                                      </div>
-                                  </td>
-                                  <td class="category=name">
-                                      <div  data-item="{{ $item->category}}">
-                                          {{ $item->category}}
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <form action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
-                                               @csrf
-                                               @method('PUT')
-                                               <input type="hidden" name="status" value="{{$item->status}}"></input>
-                                               <button type="submit">完了</button>
-                                          </form>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <a href="/tasks/{{ $item->id }}/edit/">編集</a>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div>
-                                          <form onsubmit="return deleteTask();" action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
-                                                  @csrf
-                                                  @method('DELETE')
-                                                  <button type="submit">削除</button>
-                                              </form>
-                                      </div>
-                                  </td>
-                              </tr>
-                          @endforeach
-                      </tbody>
-                  </table>
+                  <div>
+                      タイトル
+                  </div>
+                  <div>
+                      カテゴリー
+                  </div>
+              </div>
+              <div class=filter_item>
+                  @foreach ($tasks as $item)
+                  <div class=item>
+                      <div>
+                          {{ $item->name }}
+                  </div>
+                  <div  data-item="{{ $item->category}}">
+                      {{ $item->category}}
+                  </div>
+                  <div>
+                      <form action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
+                          @csrf
+                          @method('PUT')
+                          <input type="hidden" name="status" value="{{$item->status}}"></input>
+                          <button type="submit">完了</button>
+                      </form>
+                  </div>
+                  <div>
+                      <a href="/tasks/{{ $item->id }}/edit/">編集</a>
+                  </div>
+                  <div>
+                      <form onsubmit="return deleteTask();" action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit">削除</button>
+                      </form>
+                  </div>
+                  </div>
+                  @endforeach
                   <div class="clear"></div>
               </div>
           </div>
@@ -149,7 +133,7 @@
     let tasks = []
     window.onload=function(){
         
-        filter_item = document.getElementsByClassName("filter-item");
+        filter_item = document.getElementsByClassName("filter_item");
         for (let item of filter_item) {
             console.log(item.cells[0].innerText)
             console.log( item.cells[1].innerText)
@@ -169,7 +153,46 @@
     }
     
     function selectCAT(element){
-        console.log(element.id)
+        let category = element.value
+        for (let item of tasks){
+            if(category == item.category){
+                console.log(filter_item)
+                filter_item.item(0).appendChild(`<td class="item-name">
+                                      <div>
+                                          {{ $item->name }}
+                                      </div>
+                                  </td>
+                                  <td class="category=name">
+                                      <div  data-item="{{ $item->category}}">
+                                          {{ $item->category}}
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <form action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
+                                               @csrf
+                                               @method('PUT')
+                                               <input type="hidden" name="status" value="{{$item->status}}"></input>
+                                               <button type="submit">完了</button>
+                                          </form>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <a href="/tasks/{{ $item->id }}/edit/">編集</a>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div>
+                                          <form onsubmit="return deleteTask();" action="/tasks/{{ $item->id }}" method="post" role="menuitem" tabindex="-1">
+                                                  @csrf
+                                                  @method('DELETE')
+                                                  <button type="submit">削除</button>
+                                              </form>
+                                      </div>
+                                  </td>`)
+            }
+        }
     }
 
     // let itemname = ["洗濯","買い物","ゲーム"]
